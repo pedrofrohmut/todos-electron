@@ -4,9 +4,9 @@
   "description": "An desktop app to act as a frontend for my todos-csharp app",
   "main": "main.js",
   "scripts": {
-      "start": "electron .",
-      "dev": "NODE_ENV=development electron .",
-      "renderer": "cd renderer && npm run dev"
+    "start": "electron .",
+    "dev": "NODE_ENV=development electron .",
+    "renderer": "cd renderer && npm run dev"
   },
   "author": "Pedro Frohmut (Didorgas)",
   "license": "MIT",
