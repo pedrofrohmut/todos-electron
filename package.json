@@ -1,0 +1,15 @@
+{
+  "name": "todos-electron",
+  "version": "1.0.0",
+  "description": "An desktop app to act as a frontend for my todos-csharp app",
+  "main": "main.js",
+  "scripts": {
+      "start": "electron .",
+      "dev": "NODE_ENV=development electron ."
+  },
+  "author": "Pedro Frohmut (Didorgas)",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^24.0.0"
+  }
+}
