@@ -2,9 +2,9 @@ import "./spinner.css"
 
 const Spinner = () => {
   return (
-    <div class="loading-spinner-container">
-      <div class="loading-spinner"></div>
-      <div class="loading-text">Loading</div>
+    <div className="loading-spinner-container">
+      <div className="loading-spinner"></div>
+      <div className="loading-text">Loading</div>
     </div>
   )
 }

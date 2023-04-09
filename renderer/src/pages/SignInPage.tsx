@@ -1,61 +1,78 @@
+import { useState } from "react"
+
+import Spinner from "../components/Spinner"
+
 const SignInPage = () => {
+  const [isLoading, setIsLoading] = useState(false)
+  const [isSubmitted, setIsSubmitted] = useState(false)
+
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+
+  const resetState = () => {
+    setEmail("")
+    setPassword("")
+    setTimeout(() => {
+      setIsLoading(false)
+      setIsSubmitted(false)
+    }, 2000)
+  }
+
+  const handleSubmit = e => {
+    e.preventDefault()
+    setIsLoading(true)
+    setIsSubmitted(true)
+
+    resetState()
+  }
+
   return (
     <div className="page-container">
       <section className="heading">
         <h1 className="page-title">
-          <i class="fa-solid fa-right-to-bracket"></i>
+          <i className="fa-solid fa-right-to-bracket"></i>
           Sign In
         </h1>
         <p>Inform your credentials to access the dashboard</p>
       </section>
 
-      <h1>Sign In Form</h1>
+      {isLoading && <Spinner />}
+
+      {!isLoading && (
+        <section className="form">
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label className="label-block">E-mail</label>
+              <input
+                type="email"
+                className="form-text"
+                placeholder="E-mail address registered"
+                required
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label className="label-block">Password</label>
+              <input
+                type="password"
+                className="form-text"
+                placeholder="The password for this e-mail"
+                required
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <button className="btn" type="submit" disabled={isSubmitted}>
+                Submit
+              </button>
+            </div>
+          </form>
+        </section>
+      )}
     </div>
   )
 }
 
 export default SignInPage
-//
-// <app-spinner *ngIf="isLoading"></app-spinner>
-// <div class="page-container">
-//     <section class="heading">
-//         <h1 class="page-title">
-//             <i class="fa-solid fa-right-to-bracket"></i>
-//             Sign In
-//         </h1>
-//         <p>Inform your credentials to access the dashboard</p>
-//     </section>
-//     <section *ngIf="!isLoading" class="form">
-//         <form (submit)="handleSubmit()">
-//             <div class="form-group">
-//                 <label class="label-block">E-mail</label>
-//                 <input
-//                     type="email"
-//                     [(ngModel)]="email"
-//                     name="email"
-//                     class="form-text"
-//                     placeholder="E-mail address registred"
-//                     required
-//                 />
-//             </div>
-//             <div class="form-group">
-//                 <label class="label-block">Password</label>
-//                 <input
-//                     type="password"
-//                     [(ngModel)]="password"
-//                     name="password"
-//                     class="form-text"
-//                     placeholder="user password for this e-mail"
-//                     min="3"
-//                     required
-//                 />
-//             </div>
-//             <div class="form-group">
-//                 <button type="submit" class="btn" [disabled]="isSubmitted && 'disabled'">
-//                     Submit
-//                 </button>
-//             </div>
-//         </form>
-//     </section>
-// </div>
-//
