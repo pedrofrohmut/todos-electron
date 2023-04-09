@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "dev": "NODE_ENV=development electron .",
+    "electron": "NODE_ENV=development electron .",
     "renderer": "cd renderer && npm run dev"
   },
   "author": "Pedro Frohmut (Didorgas)",

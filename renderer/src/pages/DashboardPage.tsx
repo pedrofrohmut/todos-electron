@@ -2,16 +2,17 @@ const DashboardPage = () => {
   const user = ""
   return (
     <div className="page-container">
-
       <section className="heading">
-        <h1 className="page-title">Welcome {user && user.name ? user.name : ""}</h1>
+        <h1 className="page-title">
+          <i class="fa-solid fa-calendar-days"></i>
+          Dashboard
+        </h1>
         <p>Goals Dashboard</p>
       </section>
 
       <h1>Add Goal Form</h1>
 
       <h1>Goals List</h1>
-
     </div>
   )
 }

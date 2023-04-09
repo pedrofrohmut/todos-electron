@@ -99,14 +99,15 @@ section.heading p {
 }
 
 .page-title {
-  font-size: 2.5rem;
+  font-size: 2.4rem;
   color: var(--lightBlueGreen);
   text-align: center;
   margin: 0;
+  height: 40px;
 }
 
 .page-title i {
-  margin-right: 0.2em;
+  margin-right: 0.4em;
 }
 
 .btn {

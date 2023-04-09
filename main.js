@@ -6,7 +6,8 @@ const isDevEnv = process.env.NODE_ENV === "development"
 const createMainWindow = () => {
   const mainWindow = new BrowserWindow({
     title: "TodosApp",
-    width: isDevEnv ? 1600 : 800,
+    // width: isDevEnv ? 1600 : 800,
+    width: 800,
     height: 600
   })
 

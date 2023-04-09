@@ -2,12 +2,14 @@ const SignInPage = () => {
   return (
     <div className="page-container">
       <section className="heading">
-        <h1 className="page-title">Sign In</h1>
+        <h1 className="page-title">
+          <i class="fa-solid fa-right-to-bracket"></i>
+          Sign In
+        </h1>
         <p>Inform your credentials to access the dashboard</p>
       </section>
 
       <h1>Sign In Form</h1>
-
     </div>
   )
 }

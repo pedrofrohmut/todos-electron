@@ -1,15 +1,17 @@
 const SignUpPage = () => {
-    return (
-      <div className="page-container">
-        <section className="heading">
-          <h1 className="page-title">Sign Up</h1>
-          <p>Sign Up to so you can start working on your goals</p>
-        </section>
+  return (
+    <div className="page-container">
+      <section className="heading">
+        <h1 className="page-title">
+          <i class="fa-solid fa-right-to-bracket"></i>
+          Sign Up
+        </h1>
+        <p>Sign Up to so you can start working on your goals</p>
+      </section>
 
-        <h1>Sign Up Form</h1>
-
-      </div>
-    )
+      <h1>Sign Up Form</h1>
+    </div>
+  )
 }
 
 export default SignUpPage
