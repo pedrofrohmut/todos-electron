@@ -1,95 +1,106 @@
+import { useState } from "react"
+
+import Spinner from "../components/Spinner"
+
 const SignUpPage = () => {
+  const [isLoading, setIsLoading] = useState(false)
+  const [isSubmitted, setIsSubmitted] = useState(false)
+
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [phone, setPhone] = useState("")
+  const [password, setPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("")
+
+  const resetState = () => {
+    setName("")
+    setEmail("")
+    setPhone("")
+    setPassword("")
+    setConfirmPassword("")
+    setTimeout(() => {
+      setIsLoading(false)
+      setIsSubmitted(false)
+    }, 2000)
+  }
+
+  const handleSubmit = e => {
+    e.preventDefault()
+    setIsLoading(true)
+    setIsSubmitted(true)
+
+    resetState()
+  }
+
   return (
     <div className="page-container">
       <section className="heading">
         <h1 className="page-title">
-          <i class="fa-solid fa-right-to-bracket"></i>
+          <i className="fa-solid fa-right-to-bracket"></i>
           Sign Up
         </h1>
         <p>Sign Up to so you can start working on your goals</p>
       </section>
 
-      <h1>Sign Up Form</h1>
+      {isLoading && <Spinner />}
+
+      {!isLoading && (
+        <section className="form">
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label className="label-block">Name</label>
+              <input
+                className="form-text"
+                type="text"
+                required
+                placeholder="Your full name"
+                value={name}
+                onChange={e => setName(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label className="label-block">E-mail</label>
+              <input
+                className="form-text"
+                type="email"
+                required
+                placeholder="E-mail address you will use to sign in later"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label className="label-block">Password</label>
+              <input
+                className="form-text"
+                type="password"
+                required
+                placeholder="Password to authenticate to your account later"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <label className="label-block">Confirm Password</label>
+              <input
+                className="form-text"
+                type="password"
+                required
+                placeholder="Confirm your password to check for any typos"
+                value={confirmPassword}
+                onChange={e => setConfirmPassword(e.target.value)}
+              />
+            </div>
+            <div className="form-group">
+              <button className="btn" type="submit" disabled={isSubmitted}>
+                Submit
+              </button>
+            </div>
+          </form>
+        </section>
+      )}
     </div>
   )
 }
 
 export default SignUpPage
-
-// <app-spinner *ngIf="isLoading"></app-spinner>
-// <div class="page-container">
-//     <section class="heading">
-//         <h1 class="page-title">
-//             <i class="fa-solid fa-right-to-bracket"></i>
-//             Sign Up
-//         </h1>
-//         <p>Inform your credentials to access the dashboard</p>
-//     </section>
-//     <section class="form">
-//         <form (submit)="handleSubmit()">
-//             <div class="form-group">
-//                 <label class="label-block">Name</label>
-//                 <input
-//                     type="text"
-//                     [(ngModel)]="name"
-//                     name="name"
-//                     class="form-text"
-//                     placeholder="Your full name"
-//                     required
-//                 />
-//             </div>
-//             <div class="form-group">
-//                 <label class="label-block">E-mail</label>
-//                 <input
-//                     type="email"
-//                     [(ngModel)]="email"
-//                     name="email"
-//                     class="form-text"
-//                     placeholder="Enter an E-mail address"
-//                     required
-//                 />
-//             </div>
-//             <div class="form-group">
-//                 <label class="label-block">Phone</label>
-//                 <input
-//                     type="text"
-//                     [(ngModel)]="phone"
-//                     name="phoen"
-//                     class="form-text"
-//                     placeholder="Phone number like: 999-999-9999"
-//                     pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-//                     required
-//                 />
-//             </div>
-//             <div class="form-group">
-//                 <label class="label-block">Password</label>
-//                 <input
-//                     type="password"
-//                     [(ngModel)]="password"
-//                     name="password"
-//                     class="form-text"
-//                     placeholder="Enter a password for this e-mail"
-//                     min="3"
-//                     required
-//                 />
-//             </div>
-//             <div class="form-group">
-//                 <label class="label-block">Confirm Password</label>
-//                 <input
-//                     type="password"
-//                     [(ngModel)]="confirmPassword"
-//                     name="confirmPassword"
-//                     class="form-text"
-//                     placeholder="Retype your password to be sure"
-//                     required
-//                 />
-//             </div>
-//             <div class="form-group">
-//                 <button type="submit" class="btn" [disabled]="isSubmitted && 'disabled'">
-//                     Submit
-//                 </button>
-//             </div>
-//         </form>
-//     </section>
-// </div>
-//
