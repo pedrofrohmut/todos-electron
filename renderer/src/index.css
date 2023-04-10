@@ -134,15 +134,21 @@ section.heading p {
 .form-text {
   padding: 0.8em 1.2em;
   font-size: 1rem;
-  color: var(--white);
+  color: var(--gray-200);
   background-color: var(--gray-500);
-  border: 1px solid var(--gray-500);
+  border: 2px solid var(--gray-500);
   border-radius: var(--borderRadius);
   width: 100%;
+  outline: none; /* replaced by border on focus */
+}
+
+.form-text:focus {
+    background-color: var(--gray-400);
+    color: var(--gray-700);
 }
 
 .form-text::placeholder {
-  color: var(--gray-700);
+  color: var(--gray-600);
 }
 
 .form-group {
