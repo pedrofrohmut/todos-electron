@@ -1,3 +1,7 @@
+export type AuthHeaders = {
+    Authorization: string
+}
+
 export type AuthState = {
   user?: User | null
   isLoading?: boolean
@@ -46,3 +50,8 @@ export type UserCredentials = {
   password: string
 }
 
+export type ResponseGoal = {
+    _id?: string
+    text?: string
+    userId?: string
+}
