@@ -3,18 +3,12 @@ import { configureStore } from "@reduxjs/toolkit"
 import authReducer from "./auth/authSlice"
 import goalsReducer from "./goals/goalSlice"
 
-const store = configureStore({
+export const store = configureStore({
     reducer: {
         auth: authReducer,
-        goal: goalReducer
+        goal: goalsReducer
     }
 })
 
-type RootState = ReturnType<typeof store.getState>
-type AppDispach = typeof store.dispatch
-
-export default {
-    store,
-    RootState,
-    AppDispach
-}
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch
