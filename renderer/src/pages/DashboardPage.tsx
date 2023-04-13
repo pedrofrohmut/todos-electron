@@ -1,49 +1,54 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import AddGoalForm from "../components/AddGoalForm"
 import GoalList from "../components/GoalList"
 import Spinner from "../components/Spinner"
+import { getAll } from "../redux/goals/goalThunk"
+import { useTypedDispatch, useTypedSelector } from "../redux/hooks"
 
 const DashboardPage = () => {
-  const [isLoading, setIsLoading] = useState("")
+    const [isLoading, setIsLoading] = useState(true)
 
-  // Testing state. Fetch it later
-  const user = ""
-  const goals = [
-    { id: 1, text: "Goal 1", userId: 1 },
-    { id: 2, text: "Goal 2", userId: 1 },
-    { id: 3, text: "Goal 3", userId: 1 }
-  ]
+    const user = useTypedSelector(state => state.auth.user)
+    const goals = useTypedSelector(state => state.goal.goals)
 
-  const handleAdd = (content) => {
-    console.log("Handle Add Goal. content: " + content)
-  }
+    const dispatch = useTypedDispatch()
 
-  const handleDelete = (id) => {
-    console.log("Handle Delete Goal. id: " + id)
-  }
+    const handleAdd = (content: string) => {
+        console.log("Handle Add Goal. content: " + content)
+    }
 
-  return (
-    <>
-      {isLoading && <Spinner />}
+    const handleDelete = (id: string) => {
+        console.log("Handle Delete Goal. id: " + id)
+    }
 
-      {!isLoading && (
-        <div className="page-container">
-          <section className="heading">
-            <h1 className="page-title">
-              <i className="fa-solid fa-calendar-days"></i>
-              Goals Dashboard
-            </h1>
-            <p>Welcome {user && user.name ? user.name : "username"}</p>
-          </section>
+    // onMount
+    useEffect(() => {
+        setTimeout(() => {
+            setIsLoading(false)
+        }, 300)
+        dispatch(getAll())
+    }, [])
 
-          <AddGoalForm addGoal={handleAdd} />
+    return (
+        <>
+            {isLoading && <Spinner />}
 
-          <GoalList goals={goals} removeGoal={handleDelete} />
-        </div>
-      )}
-    </>
-  )
+            <div className="page-container">
+                <section className="heading">
+                    <h1 className="page-title">
+                        <i className="fa-solid fa-calendar-days"></i>
+                        Goals Dashboard
+                    </h1>
+                    <p>Welcome {user && user.name ? user.name : "username"}</p>
+                </section>
+
+                <AddGoalForm addGoal={handleAdd} />
+
+                <GoalList goals={goals} removeGoal={handleDelete} />
+            </div>
+        </>
+    )
 }
 
 export default DashboardPage
