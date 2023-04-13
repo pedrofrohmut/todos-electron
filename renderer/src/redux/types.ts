@@ -36,6 +36,13 @@ export type UpdatedGoal = {
   text: string
 }
 
+export type CreateUser = {
+  name?: string
+  email?: string
+  password?: string
+  phone?: string
+}
+
 export type User = {
   id?: string
   name?: string

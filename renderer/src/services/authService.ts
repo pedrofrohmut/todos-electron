@@ -1,10 +1,10 @@
 import axios from "axios"
 
-import { SessionUser, User, UserCredentials } from "../redux/types"
+import { CreateUser, SessionUser, UserCredentials } from "../redux/types"
 
 const AUTH_API_URL = "http://localhost:5000/api/users"
 
-export const signup = async (user: User): Promise<void> => {
+export const signup = async (user: CreateUser): Promise<void> => {
     await axios.post(AUTH_API_URL, user)
 }
 

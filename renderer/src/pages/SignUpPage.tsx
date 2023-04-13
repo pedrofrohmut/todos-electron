@@ -96,6 +96,17 @@ const SignUpPage = () => {
                         />
                     </div>
                     <div className="form-group">
+                        <label className="label-block">Phone</label>
+                        <input
+                            className="form-text"
+                            type="text"
+                            required
+                            placeholder="Phone number (999-999-9999)"
+                            value={phone}
+                            onChange={e => setPhone(e.target.value)}
+                        />
+                    </div>
+                    <div className="form-group">
                         <label className="label-block">Password</label>
                         <input
                             className="form-text"
