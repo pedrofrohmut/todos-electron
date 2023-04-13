@@ -1,7 +1,10 @@
 import { useState } from "react"
 
-const AddGoalForm = ({ addGoal }) => {
-  const [isLoading, setIsLoading] = useState(false)
+type Props = {
+    addGoal: (content: string) => void
+}
+
+const AddGoalForm = ({ addGoal }: Props) => {
   const [isSubmitted, setIsSubmitted] = useState(false)
 
   const [content, setContent] = useState("")
@@ -9,14 +12,12 @@ const AddGoalForm = ({ addGoal }) => {
   const resetState = () => {
     setContent("")
     setTimeout(() => {
-      setIsLoading(false)
       setIsSubmitted(false)
     }, 2000)
   }
 
-  const handleSubmit = e => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    setIsLoading(true)
     setIsSubmitted(true)
 
     addGoal(content)

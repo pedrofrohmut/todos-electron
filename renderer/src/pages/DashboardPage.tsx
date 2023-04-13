@@ -5,8 +5,9 @@ import AddGoalForm from "../components/AddGoalForm"
 import GoalList from "../components/GoalList"
 import Spinner from "../components/Spinner"
 
+import { setUser } from "../redux/auth/authSlice"
 import { resetGoals } from "../redux/goals/goalSlice"
-import { getAll } from "../redux/goals/goalThunk"
+import { add, getAll, remove } from "../redux/goals/goalThunk"
 import { useTypedDispatch, useTypedSelector } from "../redux/hooks"
 
 const DashboardPage = () => {
@@ -17,23 +18,43 @@ const DashboardPage = () => {
     const [isLoading, setIsLoading] = useState(true)
 
     const user = useTypedSelector(state => state.auth.user)
-    const {
-        goals,
-        isLoading: isLoadingGoals,
-        isSuccess,
-        isError,
-        message
-    } = useTypedSelector(state => state.goal)
+    const { goals, isLoading: isLoadingGoals } = useTypedSelector(state => state.goal)
 
-    const handleAdd = (content: string) => {
-        console.log("Handle Add Goal. content: " + content)
+    const handleAdd = (text: string) => {
+        if (user) {
+            setIsLoading(true)
+            dispatch(add({ text, userId: user.id }))
+            setTimeout(() => {
+                dispatch(getAll())
+                setIsLoading(false)
+            }, 380)
+        }
     }
 
     const handleDelete = (id: string) => {
-        console.log("Handle Delete Goal. id: " + id)
+        if (user) {
+            setIsLoading(true)
+            dispatch(remove(id))
+            setTimeout(() => {
+                dispatch(getAll())
+                setIsLoading(false)
+            }, 380)
+        }
     }
 
-    // onMount
+    // Check for user on localStorage
+    useEffect(() => {
+        if (!user) {
+            const lsUser = localStorage.getItem("ls_user")
+            if (!lsUser) {
+                setTimeout(() => navigate("/signin"), 500)
+            } else {
+                dispatch(setUser(JSON.parse(lsUser)))
+            }
+        }
+    }, [user])
+
+    // Load goals
     useEffect(() => {
         setTimeout(() => setIsLoading(false), 380)
 
@@ -44,13 +65,7 @@ const DashboardPage = () => {
         }
     }, [])
 
-    useEffect(() => {
-        if (!user) {
-            setTimeout(() => navigate("/signin"), 500)
-        }
-    }, [user])
-
-    if (! user) return <Spinner />
+    if (!user) return <Spinner />
 
     return (
         <>
