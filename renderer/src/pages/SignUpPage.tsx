@@ -1,10 +1,15 @@
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 import Spinner from "../components/Spinner"
 import { signup } from "../redux/auth/authThunk"
-import { useTypedDispatch } from "../redux/hooks"
+import { useTypedDispatch, useTypedSelector } from "../redux/hooks"
 
 const SignUpPage = () => {
+    const navigate = useNavigate()
+    const dispatch = useTypedDispatch()
+    const { user, isSuccess } = useTypedSelector(state => state.auth)
+
     const [isLoading, setIsLoading] = useState(false)
     const [isSubmitted, setIsSubmitted] = useState(false)
 
@@ -15,8 +20,6 @@ const SignUpPage = () => {
     const [confirmPassword, setConfirmPassword] = useState("")
 
     const passwordRef = useRef<HTMLInputElement>(null)
-
-    const dispatch = useTypedDispatch()
 
     const resetState = () => {
         setName("")
@@ -58,6 +61,13 @@ const SignUpPage = () => {
         dispatch(signup({ name, email, phone, password }))
         resetState()
     }
+
+    useEffect(() => {
+        // Is loading here to no instant redirect on form submit
+        if (isSuccess || user) {
+            navigate("/")
+        }
+    }, [isSuccess, user])
 
     return (
         <div className="page-container">

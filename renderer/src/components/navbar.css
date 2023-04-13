@@ -31,3 +31,8 @@ header {
 .nav-username {
     margin-right: 2em;
 }
+
+header span {
+    color: var(--yellow);
+    font-size: 1.2rem;
+}

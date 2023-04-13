@@ -16,7 +16,7 @@ export const authSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {
-        reset: (state: AuthState) => {
+        resetAuth: (state: AuthState) => {
             state.isLoading = false
             state.isError = false
             state.isSuccess = false
@@ -62,6 +62,6 @@ export const authSlice = createSlice({
     }
 })
 
-export const { reset, setUser } = authSlice.actions
+export const { resetAuth, setUser } = authSlice.actions
 
 export default authSlice.reducer
