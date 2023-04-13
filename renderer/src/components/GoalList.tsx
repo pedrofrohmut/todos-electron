@@ -2,34 +2,27 @@ import "./goal-list.css"
 
 import { Goal } from "../redux/types"
 
-type Props = {
+import GoalListItem from "./GoalListItem"
+
+type GoalListProps = {
     goals: Goal[]
     removeGoal: (goalId: string) => void
 }
 
-const GoalList = ({ goals, removeGoal }: Props) => (
-    <>
+const GoalList = ({ goals, removeGoal }: GoalListProps) => (
+    <div className="goals">
+        <div className="goals-title">Goals</div>
+
         {goals && goals.length > 0 && (
-            <div className="goals">
-                <div className="goals-title">Goals</div>
+            <>
                 {goals.map((goal: Goal) => (
-                    <div className="goal" key={goal.id}>
-                        <div className="content">{goal.text}</div>
-                        <button className="btn" onClick={() => removeGoal(goal?.id)}>
-                            <i className="fa-solid fa-trash-can"></i>
-                            Delete
-                        </button>
-                    </div>
+                    <GoalListItem goal={goal} removeGoal={removeGoal} />
                 ))}
-            </div>
+            </>
         )}
 
-        {(!goals || goals.length == 0) && (
-            <div className="goals">
-                <div className="goals-title">No goals to display</div>
-            </div>
-        )}
-    </>
+        {(!goals || goals.length == 0) && <div className="goals-title">No goals to display</div>}
+    </div>
 )
 
 export default GoalList

@@ -14,9 +14,9 @@ export const getAll = createAsyncThunk("goal/getAll", async (_, thunkApi: any): 
 
 export const add = createAsyncThunk(
     "goal/add",
-    async (goal: Goal, thunkApi: any): Promise<Goal> => {
+    async (goal: Goal, thunkApi: any): Promise<void> => {
         try {
-            return await goalService.add(goal)
+            await goalService.add(goal)
         } catch (err) {
             return thunkApi.rejectWithValue(getMessageFromErr(err))
         }
