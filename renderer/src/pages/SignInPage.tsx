@@ -1,6 +1,8 @@
 import { useState } from "react"
 
 import Spinner from "../components/Spinner"
+import { signin } from "../redux/auth/authThunk"
+import { useTypedDispatch } from "../redux/hooks"
 
 const SignInPage = () => {
     const [isLoading, setIsLoading] = useState(false)
@@ -8,6 +10,8 @@ const SignInPage = () => {
 
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+
+    const dispatch = useTypedDispatch()
 
     const resetState = () => {
         setEmail("")
@@ -18,11 +22,12 @@ const SignInPage = () => {
         }, 2000)
     }
 
-    const handleSubmit = e => {
+    const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
         setIsLoading(true)
         setIsSubmitted(true)
 
+        dispatch(signin({ email, password }))
         resetState()
     }
 
