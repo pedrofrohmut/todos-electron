@@ -1,18 +1,29 @@
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 import AddGoalForm from "../components/AddGoalForm"
 import GoalList from "../components/GoalList"
 import Spinner from "../components/Spinner"
+
+import { resetGoals } from "../redux/goals/goalSlice"
 import { getAll } from "../redux/goals/goalThunk"
 import { useTypedDispatch, useTypedSelector } from "../redux/hooks"
 
 const DashboardPage = () => {
+    const dispatch = useTypedDispatch()
+    const navigate = useNavigate()
+
+    // This variable only exists to make the UI not so flashy (loading ending too fast)
     const [isLoading, setIsLoading] = useState(true)
 
     const user = useTypedSelector(state => state.auth.user)
-    const goals = useTypedSelector(state => state.goal.goals)
-
-    const dispatch = useTypedDispatch()
+    const {
+        goals,
+        isLoading: isLoadingGoals,
+        isSuccess,
+        isError,
+        message
+    } = useTypedSelector(state => state.goal)
 
     const handleAdd = (content: string) => {
         console.log("Handle Add Goal. content: " + content)
@@ -24,15 +35,26 @@ const DashboardPage = () => {
 
     // onMount
     useEffect(() => {
-        setTimeout(() => {
-            setIsLoading(false)
-        }, 300)
+        setTimeout(() => setIsLoading(false), 380)
+
         dispatch(getAll())
+
+        return () => {
+            dispatch(resetGoals())
+        }
     }, [])
+
+    useEffect(() => {
+        if (!user) {
+            setTimeout(() => navigate("/signin"), 500)
+        }
+    }, [user])
+
+    if (! user) return <Spinner />
 
     return (
         <>
-            {isLoading && <Spinner />}
+            {(isLoading || isLoadingGoals) && <Spinner />}
 
             <div className="page-container">
                 <section className="heading">

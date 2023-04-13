@@ -24,7 +24,7 @@ export const goalSlice = createSlice({
     name: "goals",
     initialState,
     reducers: {
-        reset: (state: GoalState) => {
+        resetGoals: (state: GoalState) => {
             state.goals = []
             state.isLoading = false
             state.isSuccess = false
@@ -79,6 +79,6 @@ export const goalSlice = createSlice({
     }
 })
 
-export const { reset } = goalSlice.actions
+export const { resetGoals } = goalSlice.actions
 
 export default goalSlice.reducer
