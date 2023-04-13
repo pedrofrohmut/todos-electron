@@ -1,34 +1,36 @@
-const { app, BrowserWindow } = require("electron")
+const { app, BrowserWindow, Menu } = require("electron")
 
 const isMac = process.platform === "darwin"
 const isDevEnv = process.env.NODE_ENV === "development"
 
 const createMainWindow = () => {
-  const mainWindow = new BrowserWindow({
-    title: "TodosApp",
-    width: 800,
-    height: 950
-  })
+    const mainWindow = new BrowserWindow({
+        title: "TodosApp",
+        width: 800,
+        height: 950
+    })
 
-  if (isDevEnv) {
-    mainWindow.webContents.openDevTools()
-  }
+    Menu.setApplicationMenu(null)
 
-  mainWindow.loadURL("http://localhost:5173")
+    if (isDevEnv) {
+        mainWindow.webContents.openDevTools()
+    }
+
+    mainWindow.loadURL("http://localhost:5173")
 }
 
 app.whenReady().then(() => {
-  createMainWindow()
+    createMainWindow()
 
-  app.on("activate", () => {
-    if (BrowserWindow.getAllWindows().length === 0) {
-      createMainWindow()
-    }
-  })
+    app.on("activate", () => {
+        if (BrowserWindow.getAllWindows().length === 0) {
+            createMainWindow()
+        }
+    })
 })
 
 app.on("window-all-close", () => {
-  if (!isMac) {
-    app.quit()
-  }
+    if (!isMac) {
+        app.quit()
+    }
 })

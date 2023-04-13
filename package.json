@@ -1,16 +1,17 @@
 {
-  "name": "todos-electron",
-  "version": "1.0.0",
-  "description": "An desktop app to act as a frontend for my todos-csharp app",
-  "main": "main.js",
-  "scripts": {
-    "start": "electron .",
-    "electron": "NODE_ENV=development electron .",
-    "renderer": "cd renderer && npm run dev"
-  },
-  "author": "Pedro Frohmut (Didorgas)",
-  "license": "MIT",
-  "devDependencies": {
-    "electron": "^24.0.0"
-  }
+    "name": "todos-electron",
+    "version": "1.0.0",
+    "description": "An desktop app to act as a frontend for my todos-csharp app",
+    "main": "main.js",
+    "scripts": {
+        "start": "electron .",
+        "electron": "NODE_ENV=development electron .",
+        "renderer": "cd renderer && npm run dev",
+        "format": "prettier --write ."
+    },
+    "author": "Pedro Frohmut (Didorgas)",
+    "license": "MIT",
+    "devDependencies": {
+        "electron": "^24.0.0"
+    }
 }
